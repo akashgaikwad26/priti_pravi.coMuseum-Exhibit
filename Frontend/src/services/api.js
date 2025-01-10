@@ -1,29 +1,19 @@
-const API_URL = 'http://localhost:3000';
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:5000',  // Adjust the backend base URL
+});
+
+export default api;
+
 
 export const fetchArtifacts = async () => {
-  const response = await fetch(`${API_URL}/artifacts`);
-  return response.json();
-};
-
-export const fetchQuiz = async (artifactId) => {
-  const response = await fetch(`${API_URL}/quiz/${artifactId}`);
-  return response.json();
-};
-
-export const submitQuiz = async (artifactId, answers) => {
-  const response = await fetch(`${API_URL}/submit-quiz`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ artifactId, answers }),
-  });
-  return response.json();
-};
-
-export const addArtifact = async (artifact) => {
-  const response = await fetch(`${API_URL}/add-artifact`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(artifact),
-  });
-  return response.json();
-};
+    const response = await fetch('/api/artifacts');
+    return response.json();
+  };
+  
+  export const fetchQuiz = async (id) => {
+    const response = await fetch(`/api/quiz/${id}`);
+    return response.json();
+  };
+  
